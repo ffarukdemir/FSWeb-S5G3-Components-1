@@ -90,6 +90,52 @@ const data = [
   }
 ];
 
+const articlesDiv = document.querySelector(".articles");
+
+data.forEach((haberObj) => {
+  const articleDiv = haberYapici(haberObj);
+  articlesDiv.appendChild(articleDiv);
+});
+
+function haberYapici(haberlerdizi) {
+  const haber = document.createElement("div");
+  haber.classList.add("article");
+  
+  const haberh2 = document.createElement("h2");
+  haberh2.textContent = haberlerdizi.baslik;
+  haber.appendChild(haberh2);
+
+  const habertarih = document.createElement("p");
+  habertarih.classList.add("tarih");
+  habertarih.textContent = haberlerdizi.tarih;
+  haber.appendChild(habertarih);
+
+  const ilkParagrafEl = document.createElement("p");
+  ilkParagrafEl.textContent = haberlerdizi.ilkParagraf;
+  haber.appendChild(ilkParagrafEl);
+
+  const ikinciParagrafEl = document.createElement("p");
+  ikinciParagrafEl.textContent = haberlerdizi.ikinciParagraf;
+  haber.appendChild(ikinciParagrafEl);
+
+  const ucuncuParagrafEl = document.createElement("p");
+  ucuncuParagrafEl.textContent = haberlerdizi.ucuncuParagraf;
+  haber.appendChild(ucuncuParagrafEl);
+
+  const spanEl = document.createElement("button");
+  spanEl.classList.add("expandButton");
+  spanEl.textContent = "+";
+  spanEl.addEventListener("click", function() {
+    haber.classList.toggle("article-open");
+  });
+  haber.appendChild(spanEl);
+
+  return haber;
+}
+
+
+
+
 /*
   Adım 1: Haber oluşturmak için 'haberYapici' adında bir bileşen(component) oluşturun.
   Bileşeniniz, argümanı haberleri içeren dizi olarak alan bir fonksiyon olacak,
@@ -102,7 +148,10 @@ const data = [
     {üç ayrı paragraf elementi}
 
     <span class="expandButton">+</span>
-  </div>
+  </div>*/
+  
+  
+  /*
 
   Adım 2: Hala `haberYapici` içindeyiz, span.expandButton 'a bir click event dinleyici ekleyin.
   Bu dinleyici div.article öğesine 'article-open' class'ını ekleyip/çıkaracak (toogle).
